@@ -41,28 +41,32 @@ public class DriversLicense {
 					// 		** GETTERS **
 					// 		-------------
 	
-	// returns fullname and Age in years
+	// returns full name and Age in years
 	public String getNameAndAge() {
 		return ("Full name: " + firstName + " " + lastName + "\r\nAge: " + getAge());
 	}
 	
-	
+	// returns full name
 	public String getFullName() {
 		return (firstName + " " + lastName);
 	}
 	
+	// returns age in years
 	public int getAge() {
 		return (Period.between(DOB, LocalDate.now()).getYears());
 	}
 	
+	// returns first name
 	public String getFirstName() {
 		return firstName;
 	}
-
+	
+	// returns last name
 	public String getLastName() {
 		return lastName;
 	}
-
+	
+	// returns date of birth
 	public LocalDate getDOB() {
 		return DOB;
 	}
