@@ -2,12 +2,22 @@ import java.util.Scanner;
 
 public class PigLatin {
 
+// TODO: 
+//	Integrate the vowel 'y' handler:
+//	if ((stringToChar[i] == 'y') && (i == stringToChar.length-1)) {
+//		String FirstHalf = word.substring(0, i);
+//		String SecondHalf = word.substring(i);
+//		translatedWord = SecondHalf + FirstHalf + "ay";
+//		System.out.println(translatedWord);
+//		break??
+//	}
+
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		System.out.println("Hello, World! Welcome to the Pig Latin translator");
-		String aword = UserInput();
-//		int VowelIdx = VowelIndx(UserInput());
-		TranslateIt(aword);
+		String usersWord = UserInput();
+		int vowelIndex = vowelChecker(usersWord);
+		Translator(vowelIndex, usersWord);
 
 	}
 	
@@ -17,56 +27,66 @@ public class PigLatin {
 		//read the input of the user
 		Scanner reader = new Scanner(System.in);
 		//place the input of the user into a variable
-		String englishWord = reader.next();
+		String userWord = reader.next();
 		reader.close();
 		//TODO: error handling for bad input data
-		return englishWord;
+		return userWord;
 	}
-	// word = pig
-	public static void TranslateIt (String word) {
-		char[] stringToChar = word.toCharArray();
-		char[] vowels = {'a', 'e', 'i', 'o', 'u'};		
-		for (int i = 0; i < stringToChar.length-1; i++) {
-			for (int j = 0; j < vowels.length; j++) {				 
-				int VowelIndex = 0;
-				System.out.println(VowelIndex);
-				String translatedWord = new String();				
-//				System.out.println("stringToChar[i]: " + stringToChar[i]);
-//				System.out.println("vowels[j]: " + vowels[j]);
-				if (stringToChar[i] == vowels[j]) {					
-//					System.out.println("stringToChar[i] == vowels[j]: true");
-//					VowelIndex = word.indexOf(i);
-					System.out.println(i);
-					System.out.println(i);
-					if (VowelIndex == 0) {
-						System.out.println(word + "yay");
-						break;
-					} else {
-						System.out.println(VowelIndex);
-						String FirstHalf = word.substring(0, VowelIndex);
-						System.out.println(FirstHalf);
-						String SecondHalf = word.substring(VowelIndex);
-						System.out.println(SecondHalf);
-						translatedWord = SecondHalf + FirstHalf + "ay";
-						System.out.println(translatedWord);
-						break;
-					}
-				} else if ((stringToChar[i] == 'y') && (i == stringToChar.length-1)) {
-//					System.out.println("stringToChar[i] == 'y': true");
-					VowelIndex = word.indexOf('y');
-					String FirstHalf = word.substring(0, VowelIndex);
-					String SecondHalf = word.substring(VowelIndex);
-					translatedWord = SecondHalf + FirstHalf + "ay";
-					System.out.println(translatedWord);
-					break;
-				} 
-//				else {
-//					System.out.println("That's not a word my lame sir, good day.");
-					
-//				}
-				// break?				
-			}			
+	
+	public static int vowelChecker (String word) {
+		//split the given word into char array
+		char[] wordArr = word.toCharArray();
+		//create a char array for all the vowels checked against
+		char[] vowels = {'a', 'e', 'i', 'o', 'u'};	
+		// initialize with -1 in case loops end with no vowel in the word (rule3)
+		int vowelIdx = -1;
+		//iterate through every char in word
+		for (int i = 0; i < wordArr.length; i++) {
+			// iterate thru every vowel in array
+			for (int j = 0; j < vowels.length; j++) {			
+				// check if there is a vowel in the word
+				if (wordArr[i] == vowels[j]) {
+					vowelIdx = i;
+					return vowelIdx;
+				}
+			}
 		}
-		return;
+		return vowelIdx;
 	}
+	
+	public static void Translator (int vIdx, String word) {
+		if (vIdx == 0) {
+			ruleOne(word);
+		} else if (vIdx > 0) {
+			ruleTwo(word, vIdx);
+		} else {
+			ruleThree(word);
+		}
+	}
+	
+	public static void ruleOne (String word) {
+		System.out.println(word + "yay");
+	}
+	
+	public static void ruleTwo (String word, int indx) {
+		String FirstHalf = word.substring(0, indx);
+		String SecondHalf = word.substring(indx);
+		System.out.println(SecondHalf + FirstHalf + "ay");
+	}
+	
+	public static void ruleThree (String word) {
+		System.out.println(word + "ay");
+	}	
 }
+		
+//				} else  
+////				else {
+////					System.out.println("That's not a word my lame sir, good day.");
+//					
+////				}
+//				// break?				
+//			}			
+////		}
+////		return;
+//	}
+
