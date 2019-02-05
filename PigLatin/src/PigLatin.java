@@ -22,9 +22,9 @@ public class PigLatin {
 		int vowelIndex = vowelChecker(usersWord);
 		// pass both previously created variables into final method.
 		Translator(vowelIndex, usersWord);
-
 	}
 	
+	// method to prompt user for input and initialize it to a var and return that var
 	public static String UserInput() {
 		// asking user for input
 		System.out.println("Please type in an English word to be tranlated");
@@ -36,6 +36,7 @@ public class PigLatin {
 		return userWord;
 	}
 	
+	// method finds first vowel in user-generated word using nested for-loops, returns index of vowel
 	public static int vowelChecker (String word) {
 		// split the given word into char array
 		char[] wordArr = word.toCharArray();
