@@ -1,144 +1,99 @@
 // this is the library to 'scan' input from the keyboard (basically needed to prompt user for input and then store it to variable)
 import java.util.Scanner;
-// library to generate random numbers
 import java.util.Random;
-
-// this is a main *class*
+// this is a main class
 public class RockPaperScissors {
-	
-	// this is the main *method* that is absolutely needed to run code in Java... without this, code will NOT run
+	// this is the main method that is absolutely needed to run code in Java... without this, code will NOT run
 	public static void main(String[] args) {
-		System.out.println("hello World!");
-		recursiveFinal();	
+		// output to screen: "Hello World!"
+		System.out.println("hello World!");		
+		// ask for user input and store in var
+		String usersHand = getUsersHand();
+		// randomize, return and store Computers Hand
+		String compsHand = getComputersHand();
+		// determining who wins, user or computer
+		// is this recursive? 
+		determineWinner(usersHand, compsHand);
 	}
-		
-	public static void recursiveFinal() {
+	
+	public static String getUsersHand() {
 		// asking user for input
 		System.out.println("Please select 'rock', 'paper' or 'scissors'!");
 		//read the input of the user
 		Scanner reader = new Scanner(System.in);
 		//place the input of the user into a variable
-		String usersHand = reader.next();
+		String usersInput = reader.next();
+		// close the reader
 		reader.close();
-		//TODO: error handling for bad input data
-		System.out.println("You chose " + usersHand + ",");
-		
-
-		System.out.println("the Computer chose " + determineComputersHand() + ",");
-		
-		// determining who wins, user or computer
-		// is this recursive? 
-		determineWinner(usersHand, determineComputersHand());
-		
-		//an if statement that should always been asked at the end of the game if user wants to keep playing
-		//* prompt: want to play again? yes or no (boolean)
-		//* if yes, just call main() again... (do I need to null any variables..?) 
-		//* if no, then print to screen, "toodles" and run **reader.close();**
-		System.out.println("Would you like to play again? [y/N] default: yes");
-		//start up the Scanner once more to take more input from user
-		Scanner reader2 = new Scanner(System.in);
-		//place the user input into a variable
-		String playAgain = reader2.next();
-		//stop accepting user input for now
-		reader2.close();
-		// unless the user explicitly says NO!, we need to go into some logic
-		if (!(playAgain.equalsIgnoreCase("N")) ) {
-			letsPlayAgain(playAgain);
-		}
-		System.out.println("Thanks for playing!!");
-	
-	}	
-	
-	public static void letsPlayAgain(String newGame) {
-		while (!(newGame.equalsIgnoreCase("n"))) {
-			if (newGame.equalsIgnoreCase("y")) {
-				// I can't get the below to work (recursively calling main()) so I will try to put it all in a diff method
-//				main();
-				//lets hope this worked.. I put everything under it's own method called recursiveFinal()
-				recursiveFinal();
-			} else {
-				System.out.println("I'm sorry, I didn't understand that. Would you like to play again? [y/n] default: yes");
-				Scanner readerLoop = new Scanner(System.in);
-				newGame = readerLoop.next();
-				readerLoop.close();
-				if (!(newGame.equalsIgnoreCase("N")) ) {
-					letsPlayAgain(newGame);
-				}
-			}
-		}
+		// ***PROJECT REQUIREMENT: print out User's hand to screen*** 
+		System.out.println("You chose " + usersInput + ",");
+		return usersInput;
 	}
-	public static String determineComputersHand() {
-		// generating 0-2 at random
+	
+	public static String getComputersHand() {
+		// randomizer
 		Random randNum = new Random();
-		int computersHandNum = randNum.nextInt(3);
-		
+		// randomly selects a number between 0-2
+		int num = randNum.nextInt(3);
 		//initializing/declaring variable
-		String computersHand;
-		// mapping the randomizer to rock/paper/scissor
-		if (computersHandNum == 0) {
-			computersHand = "rock";
-		} else if (computersHandNum == 1) {
-			computersHand = "paper";
+		String computersChoice;
+		// mapping the random number generated to rock/paper/scissor
+		if (num == 0) {
+			computersChoice = "rock";
+		} else if (num == 1) {
+			computersChoice = "paper";
 		} else {
-			computersHand = "scissors";
+			computersChoice = "scissors";
 		}
-		return computersHand;
+		// ***PROJECT REQUIREMENT: print out Computer's hand to screen*** 
+		System.out.println("the Computer chose " + computersChoice + ",");
+		return computersChoice;
 	}
 	
 	public static void determineWinner(String user, String comp) {
-	  /* *System.out.println(variable.equals(word));*  <-- This is what Kevin taught us to use to check for equality of 
-		 two different data typed variables.. */
+	  /* *System.out.println(variable.equals(word));*  
+	   * ^--> This is what Kevin taught us to use to check for equality of 
+		 two different data type variables.. */
 		
 		//local variables for easier comparison
 		String r = "rock";
 		String p = "paper";
 		String s = "scissors";
 		
-		if ( //user wins:				
+		/////////////////////////////
+		//  CONDITIONAL OPERATORS  //
+		/////////////////////////////
+		
+		// comparing the User's & Computer's hands:
+		
+		//user wins:
+		if ( 
 			(user.equals(r) && comp.equals(s)) ||
 			(user.equals(p) && comp.equals(r)) ||
-			(user.equals(s) && comp.equals(p))) 
+			(user.equals(s) && comp.equals(p))
+		) 
 		{
+			System.out.println(user + " beats " + comp + ",");
 			System.out.println("You've beat the Computer, Congrats! You win!");
-
-		} else if (  //Computer wins
+			
+		//Computer wins	
+		} else if (  
 			user.equals(s) && comp.equals(r) ||
 			user.equals(r) && comp.equals(p) ||
-			user.equals(p) && comp.equals(s)) 
+			user.equals(p) && comp.equals(s)
+			) 
 		{
-			System.out.println("Computer takes this one, better luck next time..");
-			
-		} else if (user.equals(comp)) { //Draw  
+			System.out.println(comp + " beats " + user + ",");
+			System.out.println("The Computer takes home this victory, better luck next time..");
+		
+		//Draw	
+		} else if (user.equals(comp)) {  
+			System.out.println("both players have selected " + user + ",");
 			System.out.println("it's a draw!");
-		} else { //quick and dirty error handler
+		
+		//quick and dirty error handler
+		} else { 
 			System.out.println("oops, something went wrong.. now I go bye-bye..");
 		}
-		
 	}
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
