@@ -21,4 +21,16 @@ public class Timesheet {
 		return database;
 	}
 	
+	public TimesheetEntry get (int id) {
+		int idx = id-1;
+		if (database.size() >= id){
+			return database.get(idx);
+		} else {return null;}
+//		return database.get(idx);
+	}
+	
+	public void delete(TimesheetEntry entry) {
+		database.remove(entry);		
+	}
+	
 }	

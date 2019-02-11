@@ -98,7 +98,8 @@ public class Controller {
 
         int id = Integer.parseInt(actionParts[1]);
 		
-		// Your code here
+		TimesheetEntry deleteEntry = timesheet.get(id);
+		timesheet.delete(deleteEntry);
     }
 
 	/*
@@ -113,7 +114,7 @@ public class Controller {
             return;
         }
 
-		timesheet.list();
+		consoleUtils.printList(timesheet.list()); 
     }
 
 	/*
@@ -124,16 +125,13 @@ public class Controller {
     public void processAddAction(){
     
         String project = consoleUtils.promptString("Project Name (one word only):");
-        String description = consoleUtils.promptString("Task:");
-
-//        if(actionParts.length > 1){
-//            consoleUtils.error("Too many inputs to list command");
-//            return;
-//        }
+        
         if (project.split(" ").length > 1) {
         	consoleUtils.error("Project Name must be ONE word only!");
             return;
         }
+        
+        String description = consoleUtils.promptString("Task:");
         
         timesheet.add(project, description);
         
