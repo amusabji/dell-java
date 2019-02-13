@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 
 
-public class Gradebook { // Gradebook assignment to learn about Collections
+public class Gradebook { // Gradebook assignment to learn about Collections I guess
 	
 	public static Scanner reader = new Scanner(System.in);
 	
