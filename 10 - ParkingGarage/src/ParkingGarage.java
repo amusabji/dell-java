@@ -3,7 +3,7 @@ import javax.naming.NoPermissionException;
 public class ParkingGarage {
 	
 	// Attributes
-	public Car[] parkingSpot; 
+	public static Car[] parkingSpot; 
 	
 	// Constructor
 	public ParkingGarage(int capacity) {

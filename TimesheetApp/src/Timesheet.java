@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Timesheet {
 	// Attributes
-	private List<TimesheetEntry> database;
+	private ArrayList<TimesheetEntry> database;
 	
 	
 	// Constructor
@@ -22,10 +22,9 @@ public class Timesheet {
 	}
 	
 	public TimesheetEntry get (int id) {
-		int idx = id-1;
-		if (database.size() >= id){
-			return database.get(idx);
-		} else {return null;}
+		int idx = id-1;	
+//		Iterator<TimesheetEntry> tse =  new database.iterator();
+	
 //		return database.get(idx);
 	}
 	

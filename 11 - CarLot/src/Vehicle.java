@@ -7,3 +7,12 @@ public interface Vehicle {
 	ArrayList<> vehicleList = new ArrayList();
 	
 }
+
+
+
+// type
+
+// element
+
+// object
+
