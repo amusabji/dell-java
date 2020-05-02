@@ -8,13 +8,14 @@ public class RPS {
 		Game();
 	}
 
+	public static Scanner sc = new Scanner(System.in);
 	
 	public static void Game() {
-		RandomizeCompHand();
-			//return CompHand
-		QueryUser();
-			//return UserHand
-		DetermineWinner(QueryUser(), RandomizeCompHand());
+		//return UserHand
+		String QueryUser = QueryUser();
+		//return CompHand
+		String CompHand = RandomizeCompHand();
+		DetermineWinner(QueryUser, CompHand);
 			//returns nothing (void)
 		PlayAgain();
 			//return ans
@@ -35,6 +36,7 @@ public class RPS {
 		} else {
 			computersHand = "scissors";
 		}
+		System.out.println("Computer chose " + computersHand + ",");
 		return computersHand; //CompHand
 	}
 	
@@ -42,10 +44,10 @@ public class RPS {
 		// asking user for input
 		System.out.println("Please select 'rock', 'paper' or 'scissors'!");
 		//read the input of the user
-		Scanner reader = new Scanner(System.in);
+		
 		//place the input of the user into a variable
-		String usersHand = reader.next();
-		reader.close();
+		String usersHand = sc.nextLine();
+
 		//TODO: error handling for bad input data
 		System.out.println("You chose " + usersHand + ",");
 		return usersHand;
@@ -83,20 +85,18 @@ public class RPS {
 	
 	public static void PlayAgain() {
 		System.out.println("Would you like to play again? [y/N] default: yes");
-		//start up the Scanner once more to take more input from user
-		Scanner reader2 = new Scanner(System.in);
+
 		//place the user input into a variable
-		String ans = reader2.next();
-		//stop accepting user input for now
-		reader2.close();
+		String ans = sc.nextLine();
+
 		// unless the user explicitly says NO!, we need to go into some logic
-		if (!(ans.equalsIgnoreCase("N")) ) {
+		if (ans.equalsIgnoreCase("N")) {
+			System.out.println("Thanks for playing!!");
+		} else if (ans.equalsIgnoreCase("Y") || ans.equals("")) {
+			Game();
+		} else if (!(ans.equalsIgnoreCase("N")) ) {
 			System.out.println("I'm sorry, I didn't understand that.");
 			PlayAgain();
-		} else if (ans.equalsIgnoreCase("N")) {
-			System.out.println("Thanks for playing!!");
-		} else if (ans.equalsIgnoreCase("Y")) {
-			Game();
 		}
 		
 	}
