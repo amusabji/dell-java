@@ -21,12 +21,12 @@ public class Timesheet {
 		return database;
 	}
 	
-	public TimesheetEntry get (int id) {
-		int idx = id-1;	
+//	public TimesheetEntry get (int id) {
+//		int idx = id-1;	
 //		Iterator<TimesheetEntry> tse =  new database.iterator();
-	
+//	
 //		return database.get(idx);
-	}
+//	}
 	
 	public void delete(TimesheetEntry entry) {
 		database.remove(entry);		
