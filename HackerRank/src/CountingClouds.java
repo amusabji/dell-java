@@ -16,14 +16,3 @@ public class CountingClouds {
         System.out.println(count);
     }
 }
-
-//9
-//0
-//1
-//0
-//0
-//0
-//1
-//0
-//1
-//0
